@@ -2,7 +2,7 @@
   "name": "pet-project",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vagusarov.github.io/samurai-social",
+  "homepage": "https://mscrde.github.io/samurai-social",
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
     "@testing-library/jest-dom": "^5.17.0",
