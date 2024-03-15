@@ -1,0 +1,10 @@
+.footer {
+    background-color: aliceblue;
+    min-height: 100px;
+    max-height: 100px;
+
+    font-size: 20px;
+    font-style: oblique;
+
+    padding: 20px;
+}

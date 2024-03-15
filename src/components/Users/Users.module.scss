@@ -1,0 +1,30 @@
+.userItem {
+    & + & {
+        margin-top: 20px;
+    }
+}
+
+.usersHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+
+    .pageNumbers {
+        display: flex;
+        justify-content: flex-end;
+    
+        > div {
+            cursor: pointer;
+    
+            & + div {
+                margin-left: 5px;
+            }
+    
+            &.activePage {
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+

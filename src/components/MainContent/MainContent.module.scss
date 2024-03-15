@@ -1,0 +1,13 @@
+.mainContent {
+    display: flex;
+
+    height: 100%;
+    width: 100%;
+
+    background-color: bisque;
+
+    .content {
+        flex: 1;
+        padding: 20px;
+    }
+}

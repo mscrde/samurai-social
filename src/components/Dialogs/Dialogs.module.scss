@@ -1,0 +1,36 @@
+.dialogsContainer {
+    display: flex;
+    height: 100%;
+
+    .chatList {
+        width: 300px;
+        border-right: 2px solid black;
+        margin-right: 20px;
+
+        div  {
+            font-size: 20px;
+            
+            & + div {
+                margin-top: 20px;
+            }
+        }
+    }
+
+    .chat {
+        flex: 1;
+
+        > div + div {
+            margin-top: 20px;
+        }
+
+        .newMessageControl {
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+
+            button {
+                margin-top: 20px;
+            }
+        }
+    }
+}

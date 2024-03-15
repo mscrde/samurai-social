@@ -1,0 +1,14 @@
+.userInfoContainer {
+    display: flex;
+    align-items: center;
+
+    img {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+    }
+
+    .userInfo {
+        margin-left: 20px;
+    }
+}

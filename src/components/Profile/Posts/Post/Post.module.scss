@@ -1,0 +1,23 @@
+.post {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .authorInfo {
+        display: flex;
+        align-items: center;
+        margin-right: 30px;
+        width: 130px;
+
+        img {
+            margin-right: 10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 30px;
+        }
+    }
+
+    .message {
+        color: cornflowerblue;
+    }
+}

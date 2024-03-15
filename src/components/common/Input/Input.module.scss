@@ -1,0 +1,14 @@
+.control {
+    &.error {
+        input,
+        textarea {
+            border: 2px red solid;
+        }
+    }
+    
+
+    .errorText {
+        color: red;
+        margin-top: 2px;
+    }
+}

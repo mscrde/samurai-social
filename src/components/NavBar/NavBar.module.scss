@@ -1,0 +1,21 @@
+.navbar {
+    width: 300px;
+    background-color: burlywood;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+
+    > a {
+        text-decoration: none;
+
+        &.active {
+            color: white !important;
+        }
+
+        & + a {
+            margin-top: 20px;
+        }
+    }
+}
