@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import { Login } from "./Login"
-import { loginThunk } from "../../redux/reducers/authReducer"
+import { loginThunk } from "../../redux/reducers/authReducer.ts"
 
 const LoginApiComponent = (props) => (
     <Login {...props}/>

@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import MainContentStyles from './MainContent.module.scss';
 import { NavBarContainer } from '../NavBar/NavBarContainer';
 import { LoginContainer } from '../Login/LoginContainer';
@@ -16,7 +16,11 @@ const MainContent = (props) => (
             <React.Suspense fallback={<Loader />}>
                 <Routes>
                     <Route
-                        path='/profile/:userId'
+                        path='/'
+                        Component={() => <Navigate to={'/profile'}/>}
+                    />
+                    <Route
+                        path='/profile/:userId?'
                         Component={ProfileContainer}
                     />
                     <Route
@@ -30,6 +34,11 @@ const MainContent = (props) => (
                     <Route
                         path='/login'
                         Component={LoginContainer}
+                    />
+
+                    <Route
+                        path='*'
+                        Component={() => (<div>404 NOT FOUND</div>)}
                     />
                 </Routes>
             </React.Suspense>

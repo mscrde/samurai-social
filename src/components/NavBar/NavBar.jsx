@@ -3,9 +3,8 @@ import NavBarStyles from './NavBar.module.scss';
 
 const NavBar = (props) => {
     const navBarElementsTemplate = props.navBarData.sections.map((navBarElement) => {
-        const url = navBarElement.name === 'Профиль' ? navBarElement.url + props.authData.id : navBarElement.url;
         return (
-            <NavLink key={url} to={url}>{navBarElement.name}</NavLink>
+            <NavLink key={navBarElement.url} to={navBarElement.url}>{navBarElement.name}</NavLink>
         )
     });
 

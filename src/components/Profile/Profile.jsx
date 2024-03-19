@@ -4,7 +4,7 @@ import { UserInfo } from "./UserInfo/UserInfo";
 const Profile = (props) => (
     <div>
         <UserInfo userInfo={props.userInfo} userStatus={props.userStatus} updateUserStatus={props.updateUserStatus}/>
-        { Number(props.params?.userId) === props.authData.id && <Posts 
+        { Number(props.userInfo?.userId) === props.authData.id && <Posts 
             postsData={props.postsData}
             newPostControlValue={props.newPostControlValue}
             updateNewPostControlValue={props.updateNewPostControlValue}

@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { addNewPostAction, getUserStatusThunk, getUserThunk, updateUserStatusThunk } from "../../redux/reducers/profileReducer";
+import { addNewPostAction, getUserStatusThunk, getUserThunk, updateUserStatusThunk } from "../../redux/reducers/profileReducer.ts";
 import { Profile } from "./Profile";
 import React from "react";
 import { Loader } from "../common/Loader/Loader";
@@ -11,8 +11,18 @@ import { withSuspense } from "../hoc/WithSuspense";
 class ProfileApiComponent extends React.Component {
 
     componentDidMount() {
-        const userId = this.props.params.userId === 'me' ? this.props.authData.id : this.props.params.userId;
+        this.loadUserData();
+    }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.params.userId !== this.props.params.userId) {
+            this.loadUserData();
+        }
+    }
+
+    loadUserData() {
+        const userId = this.props.params.userId || this.props.authData.id;
+        
         this.props.getUser(userId);
         this.props.getUserStatus(userId);
     }

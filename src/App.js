@@ -4,7 +4,7 @@ import { Footer } from './components/Footer/Footer';
 import { HeaderContainer } from './components/Header/HeaderContainer';
 import { MainContent } from './components/MainContent/MainContent';
 import React from 'react';
-import { authThunk, successInitializedAction } from './redux/reducers/authReducer';
+import { authThunk, successInitializedAction } from './redux/reducers/authReducer.ts';
 import { BrowserRouter } from 'react-router-dom';
 import { Loader } from './components/common/Loader/Loader';
 import { store } from './redux/redux-store';

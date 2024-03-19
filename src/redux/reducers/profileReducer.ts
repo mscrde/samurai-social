@@ -6,7 +6,14 @@ const SET_USER_INFO = 'SET_USER_INFO';
 const SET_IS_USER_INFO_FETCHING = 'SET_IS_USER_INFO_FETCHING';
 const SET_USER_STATUS = 'SET_USER_STATUS';
 
-const initState = {
+type ProfileReducerStateType = {
+    userInfo: null | { fullName: string },
+    userStatus: null | string,
+    postsData: {message: string, authorName: string, id: number}[],
+    isUserInfoFetching: boolean,
+}
+
+const initState: ProfileReducerStateType = {
     userInfo: null,
     userStatus: null,
     postsData: [
@@ -20,12 +27,12 @@ const initState = {
     isUserInfoFetching: true,
 }
 
-const addNewPostAction = createAction(ADD_NEW_POST);
-const setUserInfoAction = createAction(SET_USER_INFO);
-const setIsUserInfoFetchingAction = createAction(SET_IS_USER_INFO_FETCHING);
-const setUserStatusAction = createAction(SET_USER_STATUS);
+const addNewPostAction = createAction<string>(ADD_NEW_POST);
+const setUserInfoAction = createAction<{ fullName: string }>(SET_USER_INFO);
+const setIsUserInfoFetchingAction = createAction<boolean>(SET_IS_USER_INFO_FETCHING);
+const setUserStatusAction = createAction<string>(SET_USER_STATUS);
 
-const getUserThunk = (userId) => (dispatch) => {
+const getUserThunk = (userId: number) => (dispatch) => {
     dispatch(setIsUserInfoFetchingAction(true));
     samuraiClient.getUserInfoById(userId).then(result => {
         dispatch(setIsUserInfoFetchingAction(false));
@@ -33,12 +40,12 @@ const getUserThunk = (userId) => (dispatch) => {
     });
 }
 
-const getUserStatusThunk = (userId) => (dispatch) => {
+const getUserStatusThunk = (userId: number) => (dispatch) => {
     samuraiClient.getUserStatus(userId)
         .then(result => dispatch(setUserStatusAction(result)))
 }
 
-const updateUserStatusThunk = (newStatus) => (dispatch) => {
+const updateUserStatusThunk = (newStatus: string) => (dispatch) => {
     samuraiClient.changeUserStatus(newStatus)
         .then(result => {
             if (result.resultCode === 0) {
@@ -55,7 +62,7 @@ const profileReducer = createReducer(initState, (builder) => {
                 ...state.postsData,
                 {
                     id: Math.round(Math.random() * 1000),
-                    authorName: state.userInfo.fullName,
+                    authorName: state.userInfo!.fullName,
                     message: action.payload,
                 }
             ]

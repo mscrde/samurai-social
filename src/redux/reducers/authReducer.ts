@@ -6,7 +6,15 @@ const SET_AUTH_DATA = 'SET_AUTH_DATA';
 const SUCCESS_LOGOUT = 'SUCCESS_LOGOUT';
 const SUCCESS_INITIALIZED = 'SUCCESS_INITIALIZED';
 
-const initState = {
+type AuthReducerStateType = {
+    id: number | null,
+    email: string | null,
+    login: string | null,
+    isAuth: boolean,
+    initialized: boolean,
+}
+
+const initState: AuthReducerStateType = {
     id: null,
     email: null,
     login: null,
@@ -14,9 +22,15 @@ const initState = {
     initialized: false,
 };
 
-const setAuthDataAction = createAction(SET_AUTH_DATA);
-const successLogoutAction = createAction(SUCCESS_LOGOUT);
-const successInitializedAction = createAction(SUCCESS_INITIALIZED);
+type SetAuthDataActionPayloadType = {
+    id: number,
+    email: string,
+    login: string,
+}
+
+const setAuthDataAction = createAction<SetAuthDataActionPayloadType>(SET_AUTH_DATA);
+const successLogoutAction = createAction<void>(SUCCESS_LOGOUT);
+const successInitializedAction = createAction<void>(SUCCESS_INITIALIZED);
 
 const authReducer = createReducer(initState, (builder) => {
     builder
@@ -43,12 +57,12 @@ const authThunk = () => (dispatch) => {
     });
 }
 
-const loginThunk = (login, password) => (dispatch) => {
-    samuraiClient.login(login, password).then(result => {
+const loginThunk = (login: string, password: string) => (dispatch) => {
+    samuraiClient.login(login, password).then((result: {resultCode: number, messages?: string[]}) => {
         if (result.resultCode === 0) {
             dispatch(authThunk())
         } else {
-            const errorMessage = result.messages.join(', ') || 'Неизвестная ошибка при авторизации';
+            const errorMessage = result.messages?.join(', ') || 'Неизвестная ошибка при авторизации';
             dispatch(stopSubmit('login', { _error: errorMessage }));
         }
     })

@@ -5,12 +5,6 @@ const UserStatus = (props) => {
     const [isStatusEditing, setIsStatusEditing] = useState(false);
     const [statusControlValue, setStatusControlValue] = useState(props.status);
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     if (prevProps.statusControlValue !== this.props.statusControlValue) {
-    //         this.setState({ statusControlValue: this.props.statusControlValue});
-    //     }
-    // }
-
     useEffect( () => {
         setStatusControlValue(props.status);
     }, [props.status])
