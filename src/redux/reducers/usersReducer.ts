@@ -8,7 +8,16 @@ const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
 const SET_IS_USERS_FETCHING = 'SET_IS_USERS_FETCHING';
 const TOGGLE_FOLLOWING_PROCESS = 'TOGGLE_FOLLOWING_PROCESS';
 
-const initState = {
+type UsersReduserStateType = {
+    users: any[],
+    usersTotalCount: number,
+    pages: number[],
+    pageSize: number,
+    isUsersFetching: boolean,
+    followingInProcessUserIds: number[]
+}
+
+const initState: UsersReduserStateType = {
     users: [],
     usersTotalCount: 0,
     pages: [],
@@ -17,12 +26,12 @@ const initState = {
     followingInProcessUserIds: [],
 }
 
-const followAction = createAction(FOLLOW);
-const unfollowAction = createAction(UNFOLLOW);
-const setUsersAction = createAction(SET_USERS);
-const setUsersTotalCountAction = createAction(SET_USERS_TOTAL_COUNT);
-const setIsUsersFetchingAction = createAction(SET_IS_USERS_FETCHING);
-const toggleFollowingProcessAction = createAction(TOGGLE_FOLLOWING_PROCESS);
+const followAction = createAction<number>(FOLLOW);
+const unfollowAction = createAction<number>(UNFOLLOW);
+const setUsersAction = createAction<any[]>(SET_USERS);
+const setUsersTotalCountAction = createAction<number>(SET_USERS_TOTAL_COUNT);
+const setIsUsersFetchingAction = createAction<boolean>(SET_IS_USERS_FETCHING);
+const toggleFollowingProcessAction = createAction<{active: boolean, userId: number}>(TOGGLE_FOLLOWING_PROCESS);
 
 const usersReducer = createReducer(initState, (builder) => {
     builder
@@ -73,7 +82,7 @@ const usersReducer = createReducer(initState, (builder) => {
         }));
 });
 
-const getUsersThunk = (page, pageSize) => (dispatch) => {
+const getUsersThunk = (page: number, pageSize: number) => (dispatch: Function) => {
     samuraiClient.getUsers(pageSize, page).then(result => {
         dispatch(setIsUsersFetchingAction(false));
         dispatch(setUsersAction(result.items));
@@ -81,7 +90,7 @@ const getUsersThunk = (page, pageSize) => (dispatch) => {
     })
 }
 
-const followThunk = (userId) => (dispatch) => {
+const followThunk = (userId: number) => (dispatch: Function) => {
     dispatch(toggleFollowingProcessAction({active: true, userId: userId}));
     samuraiClient.follow(userId).then(result => {
         if (result.resultCode === 0) {
@@ -91,7 +100,7 @@ const followThunk = (userId) => (dispatch) => {
     });
 }
 
-const unfollowThunk = (userId) => (dispatch) => {
+const unfollowThunk = (userId: number) => (dispatch: Function) => {
     dispatch(toggleFollowingProcessAction({active: true, userId: userId}));
     samuraiClient.unfollow(userId).then(result => {
         if (result.resultCode === 0) {

@@ -18,7 +18,7 @@ const initState = {
     ],
 };
 
-const sendMessageAction = createAction(SEND_MESSAGE);
+const sendMessageAction = createAction<string>(SEND_MESSAGE);
 
 const dialogReducer = createReducer(initState, (builder) => {
     builder

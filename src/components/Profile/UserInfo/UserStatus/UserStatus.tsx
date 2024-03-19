@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react"
 import UserStatusStyle from './UserStatus.module.scss';
 
-const UserStatus = (props) => {
+type UserStatusPropsType = {
+    status: string,
+    updateUserStatus: (status: string) => void
+}
+
+const UserStatus: React.FC<UserStatusPropsType> = (props) => {
     const [isStatusEditing, setIsStatusEditing] = useState(false);
     const [statusControlValue, setStatusControlValue] = useState(props.status);
 
@@ -9,8 +14,8 @@ const UserStatus = (props) => {
         setStatusControlValue(props.status);
     }, [props.status])
 
-    const onStatusControlChange = (e) => {
-        setStatusControlValue(e.currentTarget.value)
+    const onStatusControlChange = (e: any) => {
+        setStatusControlValue(e.currentTarget?.value)
     }
 
     const onStatusControlBlur = () => {
