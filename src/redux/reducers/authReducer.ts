@@ -49,7 +49,7 @@ const authReducer = createReducer(initState, (builder) => {
         }))
 });
 
-const authThunk = () => (dispatch) => {
+const authThunk = () => (dispatch: Function) => {
     return samuraiClient.auth().then(result => {
         if (result.resultCode === 0) {
             dispatch(setAuthDataAction(result.data));
@@ -57,7 +57,7 @@ const authThunk = () => (dispatch) => {
     });
 }
 
-const loginThunk = (login: string, password: string) => (dispatch) => {
+const loginThunk = (login: string, password: string) => (dispatch: Function) => {
     samuraiClient.login(login, password).then((result: {resultCode: number, messages?: string[]}) => {
         if (result.resultCode === 0) {
             dispatch(authThunk())
@@ -68,7 +68,7 @@ const loginThunk = (login: string, password: string) => (dispatch) => {
     })
 }
 
-const logoutThunk = () => (dispatch) => {
+const logoutThunk = () => (dispatch: Function) => {
     samuraiClient.logout().then(result => {
         if (result.resultCode === 0) {
             dispatch(successLogoutAction())

@@ -32,7 +32,7 @@ const setUserInfoAction = createAction<{ fullName: string }>(SET_USER_INFO);
 const setIsUserInfoFetchingAction = createAction<boolean>(SET_IS_USER_INFO_FETCHING);
 const setUserStatusAction = createAction<string>(SET_USER_STATUS);
 
-const getUserThunk = (userId: number) => (dispatch) => {
+const getUserThunk = (userId: number) => (dispatch: Function) => {
     dispatch(setIsUserInfoFetchingAction(true));
     samuraiClient.getUserInfoById(userId).then(result => {
         dispatch(setIsUserInfoFetchingAction(false));
@@ -40,12 +40,12 @@ const getUserThunk = (userId: number) => (dispatch) => {
     });
 }
 
-const getUserStatusThunk = (userId: number) => (dispatch) => {
+const getUserStatusThunk = (userId: number) => (dispatch: Function) => {
     samuraiClient.getUserStatus(userId)
         .then(result => dispatch(setUserStatusAction(result)))
 }
 
-const updateUserStatusThunk = (newStatus: string) => (dispatch) => {
+const updateUserStatusThunk = (newStatus: string) => (dispatch: Function) => {
     samuraiClient.changeUserStatus(newStatus)
         .then(result => {
             if (result.resultCode === 0) {

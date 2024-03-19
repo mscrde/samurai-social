@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { addNewPostAction, getUserStatusThunk, getUserThunk, updateUserStatusThunk } from "../../redux/reducers/profileReducer.ts";
+import { addNewPostAction, getUserStatusThunk, getUserThunk, updateUserStatusThunk } from "../../redux/reducers/profileReducer";
 import { Profile } from "./Profile";
 import React from "react";
 import { Loader } from "../common/Loader/Loader";
